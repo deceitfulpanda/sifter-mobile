@@ -5,12 +5,12 @@
       <div class="item item-divider">Recent Updates</div>
       <div class="item item-body">
         <div>
-          Hello world
+          {{ image }}
         </div>
       </div>
     </div>
   </ion-content>
   <ion-footer-bar class="button-bar bar-positive">
-    <button class="button button-icon button-clear icon ion-camera"></button>
+    <button class="button button-icon button-clear icon ion-camera" ng-click="getPhoto()"></button>
   </ion-footer-bar>
 </ion-view>
