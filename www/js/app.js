@@ -26,10 +26,22 @@ angular.module('sifter', ['ionic'])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-  // setup an abstract state for the tabs directive
-    .state('dash', {
+  // setup a dashboard page for our app
+  .state('dash', {
     url: "/dash",
     templateUrl: "templates/dash.html"
+  })
+
+  // waiting page for server response
+  .state('sifting', {
+    url: "/sifting",
+    templateUrl: "templates/sifting.html"
+  })
+
+  // results page (indicates classification response from server)
+  .state('sifted', {
+    url: "/sifted",
+    templateUrl: "templates/sifted.html"
   });
 
   // if none of the above states are matched, use this as the fallback
