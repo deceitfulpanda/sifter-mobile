@@ -11,7 +11,9 @@ angular.module('sifter.config', [])
 
   // Cloudinary needs a SHA1-hashed signature to authenticate uploads
   var getSignature = function(timestamp) {
-    return CryptoJS.SHA1('timestamp=' + timestamp + secret);
+    // info on CryptoJS at https://code.google.com/p/crypto-js/#SHA-1
+    // the docs leave out that you need to use toString to get the actual hash
+    return CryptoJS.SHA1('timestamp=' + timestamp + '' + secret).toString();
   };
 
   return {
