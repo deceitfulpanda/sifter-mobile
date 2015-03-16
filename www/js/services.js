@@ -7,7 +7,6 @@ angular.module('sifter.services', [])
     var q = $q.defer();
 
       navigator.camera.getPicture(function(result) {
-        // Do any magic you need
         q.resolve(result);
       }, function(err) {
         q.reject(err);
@@ -41,5 +40,21 @@ angular.module('sifter.services', [])
 
   return {
     uploadImage: uploadImage
+  };
+}])
+
+.factory('SifterAPI', ['$http', function($http) {
+
+  // Send image url to sifter's backend API
+  var postImgUrl = function(data) {
+    // return promise anticipating server response
+    return $http.post('http://www.mockr.co/1/cflann/items', {
+      locale: 'en_US',
+      imgurl: data.url // TODO: double check this against Cloudinary API
+    });
+  };
+
+  return {
+    postImgUrl: postImgUrl
   };
 }]);
