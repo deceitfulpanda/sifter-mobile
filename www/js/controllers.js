@@ -1,7 +1,7 @@
 // App controllers will go here :)
 angular.module('sifter.controllers', [])
 
-.controller('DashCtrl', function($scope, $location, $ionicLoading, Camera, ImgUpload) {
+.controller('DashCtrl', function($scope, $location, $ionicLoading, Camera, ImgUpload, SifterAPI) {
 
   $scope.image = 'Hello world';
 
@@ -13,24 +13,23 @@ angular.module('sifter.controllers', [])
       // show loading screen while awaiting response from server
       $scope.showLoading();
       return ImgUpload.uploadImage(imageURI);
+    }, function(err) {
+      $scope.hideLoading();
+      console.error('CAMERA ERROR:', err);
     })
-    .then(function(promise) {
-      // TODO: inspector is saying Object has no 'success' property...??
-      promise
-      .success(function(data, status, headers, config) {
-        console.log('success',data);
-        $scope.image = data;
-        $scope.hideLoading();
-      })
-      .error(function(data, status, headers, config) {
-        // handle Cloudinary error
-        console.log('error',data);
-        $scope.image = data;
-        $scope.hideLoading();
-      });
+    .then(function(response) {
+      console.log('SUCCESSFUL UPLOAD:', response);
+      // forward resulting url to server
+      return SifterAPI.postImgUrl(response.data);
+    })
+    .then(function(response) {
+      var data = JSON.parse(response.data);
+      console.log('SUCCESSFUL CLASSIFICATION:', data);
+      $scope.image = data;
+      $scope.hideLoading();
     })
     .catch(function(err) {
-      console.log('ERROR:', err);
+      console.error('ERROR:', err);
       $scope.hideLoading();
     });
   };
