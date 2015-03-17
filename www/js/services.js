@@ -29,6 +29,7 @@ angular.module('sifter.services', [])
 
     // return a promise to get url from cloudinary
     return $http.post(Cloudinary.url, {
+    // return $http.post('http://www.mockr.co/1/cflann/images', {
       // need to specify base64 encoding (see http://stackoverflow.com/questions/24014937/uploading-base64-hashed-image-to-cloudinary
       // and http://en.wikipedia.org/wiki/Data_URI_scheme#JavaScript)
       file: "data:image/jpeg;base64," + imageURI,

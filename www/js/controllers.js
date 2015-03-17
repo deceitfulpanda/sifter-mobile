@@ -1,7 +1,7 @@
 // App controllers will go here :)
 angular.module('sifter.controllers', [])
 
-.controller('DashCtrl', function($scope, $location, $ionicLoading, Camera, ImgUpload, SifterAPI) {
+.controller('DashCtrl', function($scope, $location, $ionicLoading, $ionicPopup, Camera, ImgUpload, SifterAPI) {
 
   $scope.image = 'Hello world';
 
@@ -11,7 +11,7 @@ angular.module('sifter.controllers', [])
     })
     .then(function(imageURI) {
       // show loading screen while awaiting response from server
-      $scope.showLoading();
+      $scope.showLoading('Uploading...');
       return ImgUpload.uploadImage(imageURI);
     }, function(err) {
       $scope.hideLoading();
@@ -20,12 +20,14 @@ angular.module('sifter.controllers', [])
     .then(function(response) {
       console.log('SUCCESSFUL UPLOAD:', response);
       // forward resulting url to server
+      $scope.showLoading('Classifying...');
       return SifterAPI.postImgUrl(response.data);
     })
     .then(function(response) {
       var data = JSON.parse(response.data);
       console.log('SUCCESSFUL CLASSIFICATION:', data);
       $scope.image = data;
+      // $scope.showClassification(data.classification);
       $scope.hideLoading();
     })
     .catch(function(err) {
@@ -34,9 +36,9 @@ angular.module('sifter.controllers', [])
     });
   };
 
-  $scope.showLoading = function() {
+  $scope.showLoading = function(message) {
     $ionicLoading.show({
-      template: 'Sifting...'
+      template: '<ion-spinner></ion-spinner><div style="margin-top:5px">'+message+'</div>'
     });
   };
 
