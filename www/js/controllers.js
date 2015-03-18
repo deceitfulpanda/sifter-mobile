@@ -6,6 +6,7 @@ angular.module('sifter.controllers', [])
   $scope.image = 'Hello world';
 
   $scope.getPhoto = function() {
+    console.log('Initiating Camera intent');
     Camera.takePhoto({
       destinationType : navigator.camera.DestinationType.DATA_URL
     })
@@ -26,9 +27,10 @@ angular.module('sifter.controllers', [])
     .then(function(response) {
       var data = JSON.parse(response.data);
       console.log('SUCCESSFUL CLASSIFICATION:', data);
-      $scope.image = data;
-      // $scope.showClassification(data.classification);
+      // $scope.image = data;
       $scope.hideLoading();
+      $scope.showClassification(data.classification);
+      // TODO: add card for newly scanned item (may happen automatically on card refresh?)
     })
     .catch(function(err) {
       console.error('ERROR:', err);
@@ -45,5 +47,39 @@ angular.module('sifter.controllers', [])
   $scope.hideLoading = function(){
     $ionicLoading.hide();
   };
+
+  $scope.showClassification = function(classification) {
+    var confirm = $ionicPopup.confirm({
+      title: classification,
+      template: 'Scan another item?',
+      buttons: [
+        { text: 'Cancel',
+          onTap: function() {
+            return false;
+          }
+        },
+        {
+          text: '<i class="icon ion-camera"></i>',
+          type: 'button-positive',
+          onTap: function() {
+            return true;
+          }
+        }
+      ]
+    });
+
+    confirm.then(function(res) {
+      console.log('res', res);
+      if (res) {
+        console.log('Scanning another item');
+        $scope.getPhoto();
+      } else {
+        console.log('Done scanning items');
+        // TODO: refresh cards
+      }
+    })
+  };
+
+  // $scope.showClassification('Compost'); // for testing
 
 });
