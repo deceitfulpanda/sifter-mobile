@@ -25,11 +25,11 @@ angular.module('sifter.controllers', [])
       return SifterAPI.postImgUrl(response.data);
     })
     .then(function(response) {
-      var data = JSON.parse(response.data);
-      console.log('SUCCESSFUL CLASSIFICATION:', data);
+      console.log('SUCCESSFUL CLASSIFICATION:', response);
+      var data = response.data;
       // $scope.image = data;
       $scope.hideLoading();
-      $scope.showClassification(data.classification);
+      $scope.showClassification(data);
       // TODO: add card for newly scanned item (may happen automatically on card refresh?)
     })
     .catch(function(err) {
