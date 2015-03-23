@@ -1,14 +1,23 @@
 // Entry portal to our app
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <div class="list card">
+    
+    <div class="image" ng-show="!hasTrash">
+      <img src="./img/trio.png" alt="Trashee">
+      <p>Sift your trash!</p>
+    </div>
+
+    <div class="list card" ng-show="hasTrash">
       <div class="item item-divider">Recently Sifted</div>
-      <div class="item item-body">
-        <div>
-          {{ image }}
-        </div>
+      <div class="item item-image">
+        <!-- <img src="{{ imageURL }}" alt="Sifted trash"> -->
+        <img src="{{ imageURL }}" alt="Sifted trash">
+      </div>
+      <div class="padding">
+        {{ imageDescription }} <i class="icon ion-ios-arrow-thin-right"></i> {{ imageClassification }}
       </div>
     </div>
+
   </ion-content>
   <ion-footer-bar class="button-bar bar-positive">
     <button class="button button-icon button-clear icon ion-camera" ng-click="getPhoto()"></button>

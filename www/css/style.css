@@ -1,1 +1,45 @@
 /* Empty. Add your own CSS if you like */
+
+.title-image {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  top: -8px;
+}
+
+.brand {
+  display: inline-block;
+  color: #fff;
+  font-size: 1.5em;
+  position: relative;
+  top: -14px;
+}
+
+.image {
+  text-align: center;
+}
+
+.image img {
+  max-width: 100%;
+  margin: 10px;
+}
+
+.image p {
+  text-align: center;
+  font-size: 1.5em;
+  color: #444444;
+  font-family: 'Lato', sans-serif;
+}
+
+.item-image {
+  background-color: #000000;
+}
+
+.item-image img {
+  /*max-height: 350px;*/
+}
+
+.popup-body {
+  overflow: hidden;
+}
