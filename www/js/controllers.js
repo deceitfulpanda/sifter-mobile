@@ -38,7 +38,6 @@ angular.module('sifter.controllers', [])
       $scope.showClassification(capitalize(data.classification));
       // show our most recently scanned image
       $scope.hasTrash = true;
-      console.log('has trash:', $scope.hasTrash);
     })
     .catch(function(err) {
       console.error('ERROR:', err);
@@ -59,7 +58,7 @@ angular.module('sifter.controllers', [])
   $scope.showClassification = function(classification) {
     var confirm = $ionicPopup.confirm({
       title: classification,
-      template: '<div>Scan another item?</div>',
+      template: '<img class="popup-image" src="'+images[classification]+'"><div>Scan another item?</div>',
       buttons: [
         { text: 'Cancel',
           onTap: function() {
@@ -103,6 +102,10 @@ angular.module('sifter.controllers', [])
     return start + 'w_' + size + ',h_' + size + ',c_fill' + end;
   };
 
-  // $scope.showClassification(capitalize('compost'));
+  var images = {
+    'Compost': './img/compostee.png',
+    'Recycle': './img/recyclee.png',
+    'Landfill': './img/trashee.png'
+  };
 
 });
