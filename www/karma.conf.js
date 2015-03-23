@@ -23,6 +23,7 @@ module.exports = function(config) {
       'lib/ionic/js/ionic.js',
       'lib/ionic/js/ionic-angular.js',
       '../node_modules/angular-mocks/angular-mocks.js',
+      "http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js",
 
       'js/**/*.js',
       'test/**/*.js'
