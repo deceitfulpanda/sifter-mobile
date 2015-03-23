@@ -7,6 +7,7 @@ angular.module('sifter.controllers', [])
   $scope.imageClassification;
   $scope.imageDescription;
   $scope.hasTrash = false;
+  var temp;
 
   $scope.getPhoto = function() {
     console.log('Initiating Camera intent');
@@ -24,7 +25,7 @@ angular.module('sifter.controllers', [])
     .then(function(response) {
       console.log('SUCCESSFUL UPLOAD:', response);
       // set our most recently scanned item url
-      $scope.imageURL = transformURL(response.data.url, 1000);
+      temp = transformURL(response.data.url, 1000);
       // forward resulting url to server
       $scope.showLoading('Classifying...');
       return SifterAPI.postImgUrl(response.data);
@@ -35,6 +36,7 @@ angular.module('sifter.controllers', [])
       $scope.hideLoading();
       $scope.imageClassification = data.classification.toUpperCase();
       $scope.imageDescription = data.description.name.toUpperCase();
+      $scope.imageURL = temp;
       $scope.showClassification(capitalize(data.classification));
       // show our most recently scanned image
       $scope.hasTrash = true;
