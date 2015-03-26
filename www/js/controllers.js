@@ -12,7 +12,10 @@ angular.module('sifter.controllers', [])
   $scope.getPhoto = function() {
     console.log('Initiating Camera intent');
     Camera.takePhoto({
-      destinationType : navigator.camera.DestinationType.DATA_URL
+      quality: 25,
+      destinationType : navigator.camera.DestinationType.DATA_URL,
+      targetWidth: 1200,
+      targetHeight: 900
     })
     .then(function(imageURI) {
       // show loading screen while awaiting response from server
