@@ -37,6 +37,12 @@ angular.module('sifter', ['ionic', 'sifter.controllers', 'sifter.services', 'sif
   .state('sifted', {
     url: "/sifted",
     templateUrl: "templates/sifted.html"
+  })
+
+  .state('stats', {
+    url: "/stats",
+    controller: 'StatCtrl',
+    templateUrl: 'templates/stats.html'
   });
 
   // if none of the above states are matched, use this as the fallback

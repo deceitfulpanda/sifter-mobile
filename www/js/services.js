@@ -59,4 +59,8 @@ angular.module('sifter.services', [])
   return {
     postImgUrl: postImgUrl
   };
+}])
+
+.factory('Chart', ['$http', function($http){
+
 }]);
