@@ -113,4 +113,8 @@ angular.module('sifter.controllers', [])
     'Landfill': './img/trashee.png'
   };
 
+})
+
+.controller('StatCtrl', function($scope, Chart){
+    Chart.getData();
 });

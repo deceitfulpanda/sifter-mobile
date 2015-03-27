@@ -12,7 +12,7 @@ describe('Unit: SifterAPI', function() {
   describe('uploadImage', function() {
 
     it('should make an ajax call to /api/imgurl', function() {
-      $httpBackend.whenPOST('https://evening-castle-4681.herokuapp.com/api/imgurl').respond({
+      $httpBackend.whenPOST('https://pandasifter.herokuapp.com/api/imgurl').respond({
         classification: 'compost'
       });
 
